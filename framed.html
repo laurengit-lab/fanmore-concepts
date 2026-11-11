@@ -1690,8 +1690,6 @@ body.live .hf .tally{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
   <div class="rs-p">
     <div class="lb">Heading font</div>
     <div class="rs-f"><button data-font="o">Orbitron</button><button data-font="p">Pangram</button></div>
-    <div class="lb">Floating nav</div>
-    <div class="rs-f"><button data-fn="on">On</button><button data-fn="off">Off</button></div>
     <hr>
     <a href="polish.html">Broadcast &ndash; Dark</a>
     <a href="day.html">Broadcast &ndash; Bright</a>
@@ -1853,7 +1851,7 @@ mm.querySelectorAll('[data-close]').forEach(function(x){x.addEventListener('clic
 var rs=d.querySelector('.rs'),rb=rs.querySelector('button');
 rb.addEventListener('click',function(){var on=rs.classList.toggle('on');rb.setAttribute('aria-expanded',on)});
 function setFn(v){b.classList.toggle('nofn',v==='off');rs.querySelectorAll('[data-fn]').forEach(function(x){x.toggleAttribute('aria-current',x.dataset.fn===v)});try{localStorage.setItem('fm-fn',v)}catch(e){}}
-var fn0='on';try{fn0=localStorage.getItem('fm-fn')||'on'}catch(e){}setFn(fn0);
+setFn('off');
 function setPg(v){b.classList.toggle('nopg',v==='off');rs.querySelectorAll('[data-pg]').forEach(function(x){x.toggleAttribute('aria-current',x.dataset.pg===v)});try{localStorage.setItem('fm-pg',v)}catch(e){}}
 setPg('on');
 rs.querySelectorAll('[data-pg]').forEach(function(x){x.addEventListener('click',function(){setPg(x.dataset.pg)})});

@@ -1589,8 +1589,6 @@ body.pg .sk-b h3{font-weight:700;letter-spacing:-.03em}
     <div class="rs-f"><button data-cc="sharp">Sharp</button><button data-cc="round">Round</button></div>
     <div class="lb">How it works</div>
     <div class="rs-f"><button data-hx="cards">Cards</button><button data-hx="arena">Arena</button></div>
-    <div class="lb">Floating nav</div>
-    <div class="rs-f"><button data-fn="on">On</button><button data-fn="off">Off</button></div>
     <hr>
     <a href="polish.html" aria-current="page">Broadcast &ndash; Dark</a>
     <a href="day.html">Broadcast &ndash; Bright</a>
@@ -1752,7 +1750,7 @@ mm.querySelectorAll('[data-close]').forEach(function(x){x.addEventListener('clic
 var rs=d.querySelector('.rs'),rb=rs.querySelector('button');
 rb.addEventListener('click',function(){var on=rs.classList.toggle('on');rb.setAttribute('aria-expanded',on)});
 function setFn(v){b.classList.toggle('nofn',v==='off');rs.querySelectorAll('[data-fn]').forEach(function(x){x.toggleAttribute('aria-current',x.dataset.fn===v)});try{localStorage.setItem('fm-fn',v)}catch(e){}}
-var fn0='on';try{fn0=localStorage.getItem('fm-fn')||'on'}catch(e){}setFn(fn0);
+setFn('off');
 function setPg(v){b.classList.toggle('nopg',v==='off');rs.querySelectorAll('[data-pg]').forEach(function(x){x.toggleAttribute('aria-current',x.dataset.pg===v)});try{localStorage.setItem('fm-pg',v)}catch(e){}}
 setPg('on');
 rs.querySelectorAll('[data-pg]').forEach(function(x){x.addEventListener('click',function(){setPg(x.dataset.pg)})});
