@@ -1155,7 +1155,7 @@ body.pg .sk-b h3{font-weight:700;letter-spacing:-.03em}
 .hero.bc .hc::before{content:"";position:absolute;z-index:-1;left:50%;top:50%;width:min(1100px,110%);height:150%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(5,3,42,.34),rgba(5,3,42,0));pointer-events:none}
 .hero.bc .hc{isolation:isolate}
 .hpts{position:absolute;inset:0;z-index:5;pointer-events:none;overflow:hidden}
-.hpt{position:absolute;display:inline-flex;align-items:center;gap:6px;padding:5px 9px 5px 5px;border-radius:3px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.38);-webkit-backdrop-filter:blur(10px) saturate(1.3);backdrop-filter:blur(10px) saturate(1.3);color:#fff;font-size:12.5px;font-weight:600;line-height:1;white-space:nowrap;box-shadow:0 6px 18px -8px rgba(5,3,42,.5);transform:translate(-50%,-100%) translateY(10px) scale(.92);opacity:0;transition:opacity .6s var(--ease),transform .9s var(--ease)}
+.hpt{position:absolute;display:inline-flex;align-items:center;gap:8px;padding:8px 12px 8px 8px;border-radius:3px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.38);-webkit-backdrop-filter:blur(10px) saturate(1.3);backdrop-filter:blur(10px) saturate(1.3);color:#fff;font-size:12.5px;font-weight:600;line-height:1;white-space:nowrap;box-shadow:0 6px 18px -8px rgba(5,3,42,.5);transform:translate(-50%,-100%) translateY(10px) scale(.92);opacity:0;transition:opacity .6s var(--ease),transform .9s var(--ease)}
 .hpt b{font-weight:700}
 .hpt .r{font-weight:400;color:rgba(255,255,255,.9);padding-left:7px;border-left:1px solid rgba(255,255,255,.35)}
 .hpt i{display:grid;place-items:center;width:18px;height:18px;border-radius:2px;background:#FF2E49}
@@ -1163,7 +1163,7 @@ body.pg .sk-b h3{font-weight:700;letter-spacing:-.03em}
 .hpt i svg{width:9px;height:9px;color:#fff}
 .hpt.on{opacity:1;transform:translate(-50%,-100%) translateY(-8px) scale(1)}
 .hpt.off{opacity:0;transform:translate(-50%,-100%) translateY(-26px) scale(.98);transition-duration:.8s}
-@media (max-width:900px){.hpt{font-size:11px;padding:4px 7px 4px 4px}.hpt i{width:15px;height:15px}}
+@media (max-width:900px){.hpt{font-size:11px;padding:6px 9px 6px 6px}.hpt i{width:15px;height:15px}}
 @media (prefers-reduced-motion:reduce){.hpts{display:none}}
 /* ===== News / Leadership / Contact / Footer ===== */
 .up{opacity:0;transform:translateY(24px);transition:opacity .9s,transform 1.2s var(--ease)}
@@ -1871,8 +1871,8 @@ var ok=[];A.forEach(function(a,i){if(busy.indexOf(i)>-1)return;var q=pos(a[0],a[
 var a=A[k],p=c[1];
 var e=document.createElement('span');e.className='hpt c'+(ci++%3);var w=R[ri++%R.length];e.innerHTML='<i>'+CH+'</i><b>'+w[0]+' pts</b><span class="r">'+w[1]+'</span>';e.style.left=p[0]+'px';e.style.top=p[1]+'px';L.appendChild(e);busy.push(k);
 requestAnimationFrame(function(){requestAnimationFrame(function(){e.classList.add('on')})});
-setTimeout(function(){e.classList.add('off')},2600);setTimeout(function(){e.remove();busy.splice(busy.indexOf(k),1)},3500)}
-setTimeout(function(){pop();setInterval(pop,1700)},3200);})();
+setTimeout(function(){e.classList.add('off')},3200);setTimeout(function(){e.remove();busy.splice(busy.indexOf(k),1)},4100)}
+(function loop(){setTimeout(function(){pop();loop()},2800+Math.random()*1800)})();})();
 </script>
 </body>
 </html>
