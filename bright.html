@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="fit">
 <head>
 <script>try{localStorage.setItem('fm-last',location.pathname.split('/').pop()||'polish.html')}catch(e){}</script>
 <meta charset="utf-8"><meta name="robots" content="noindex,nofollow">
@@ -1048,45 +1048,18 @@ body.hwa .cds{margin-top:calc(var(--aw) * -.117)!important}
 /* arena v3: more room under the title, cards start mid-bowl */
 body.hwa .arn{margin-top:clamp(56px,5.8vw,96px)}
 @media (max-width:900px){body.hwa .arn{margin-top:40px}}
-/* fit: each section fits one laptop screen (Broadcast) */
+/* fit v2 (Nov 12): gentle — cap tall elements by screen height, keep section spacing */
 @media (min-width:901px){
-html.fit{--pv:clamp(56px,9vh,112px)}
-html.fit .hd2{font-size:clamp(32px,min(3.9vw,6.4vh),60px)}
-html.fit body.pg .hd2{font-size:clamp(34px,min(4.3vw,7vh),68px)}
-html.fit .op-tag{margin-bottom:clamp(20px,3vh,40px)}
-/* opportunity */
-html.fit .op{padding-top:var(--pv)!important;padding-bottom:var(--pv)!important}
-html.fit .op-row{margin-top:clamp(28px,4.5vh,64px)!important}
-html.fit .op-ch{aspect-ratio:auto;height:min(52vh,calc((100vw - 2 * var(--gx)) * .44))}
-html.fit .op-stats{gap:clamp(28px,4vh,72px)!important;padding-top:clamp(16px,3vh,44px)!important}
-html.fit .st-n{font-size:clamp(44px,min(5vw,7vh),76px)}
-/* how it works */
-html.fit .hw{padding-top:clamp(48px,7vh,112px)!important;padding-bottom:clamp(48px,7vh,112px)!important}
-html.fit body.hwa .arn{margin-top:clamp(28px,4vh,96px)!important}
-html.fit body.hwa .cd.wr{min-height:min(clamp(480px,40vw,560px),max(400px,50vh))!important}
-html.fit .hw-cl{margin-top:clamp(24px,4vh,64px)!important}
-/* check-in */
-html.fit .ws.dm{padding-top:calc(64px + clamp(40px,6vh,96px))!important}
-html.fit .ws.dm .pw{margin-top:clamp(28px,4vh,56px)!important;padding-top:clamp(20px,4vh,64px)!important;padding-bottom:var(--pv)!important}
-html.fit .ws.pw-on .ws-ph{margin-top:clamp(28px,4vh,56px)!important}
+html.fit .op-ch{aspect-ratio:auto;height:min(calc((100vw - 2 * var(--gx)) * .44),58vh)}
+html.fit .op-stats{gap:clamp(40px,6vh,72px)!important}
+html.fit .op-row{margin-top:clamp(48px,7vh,96px)!important}
+html.fit .sk{height:min(clamp(300px,34vw,380px),56vh)!important}
+html.fit .ld-ph{aspect-ratio:auto;height:min(calc((100vw - 2 * var(--gx) - 72px) / 4 * 1.25),50vh)}
+html.fit .ld-g{margin-top:clamp(40px,6vh,80px)!important}
 html.fit .ws.dm .pw{grid-column:5 / -1!important}
-/* who we serve */
-html.fit .ws.wb{padding-top:calc(var(--pv) + 24px)!important;padding-bottom:var(--pv)!important}
-html.fit .wb-g{padding-top:clamp(32px,6vh,120px)!important}
-/* news */
-html.fit .nw{padding-top:var(--pv)!important;padding-bottom:var(--pv)!important}
-html.fit .nw-cd{margin-top:clamp(24px,4vh,64px)!important}
-html.fit .nw-rel{margin-top:clamp(32px,5vh,72px)!important}
-html.fit .nw-rel a{padding:clamp(14px,2.2vh,30px) 0!important}
-html.fit .nw-cd dl div{padding-top:clamp(12px,2vh,22px)!important;padding-bottom:clamp(12px,2vh,22px)!important}
-/* team */
-html.fit .ld{padding-top:var(--pv)!important;padding-bottom:var(--pv)!important}
-html.fit .ld-g{margin-top:clamp(28px,4.5vh,72px)!important}
-html.fit .ld-ph{aspect-ratio:auto;height:min(46vh,calc((100vw - 2 * var(--gx) - 72px) / 4 * 1.25))}
-/* contact */
-html.fit .ct{padding-top:var(--pv)!important;padding-bottom:var(--pv)!important}
-html.fit .ct-ls{margin-top:clamp(28px,5vh,126px)!important}
-html.fit .ct-nl{margin-top:clamp(28px,5vh,77px)!important}
+html.fit .nw-rel{margin-top:clamp(48px,7vh,104px)!important}
+html.fit .nw-rel a{padding:clamp(20px,3vh,30px) 0!important}
+html.fit body:has(.hero.bc) .ws.wb{padding-top:clamp(120px,17vh,224px)!important;padding-bottom:clamp(104px,15vh,200px)!important}
 }
 /* Investors link (homepage, next chapter) */
 .nw-iv{display:inline-flex;align-items:baseline;gap:10px;margin-top:28px;font-size:16px;font-weight:600;color:#14141C;text-decoration:none}
