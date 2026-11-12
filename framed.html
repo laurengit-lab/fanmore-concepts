@@ -1116,6 +1116,8 @@ html.fit .ct-nl{margin-top:clamp(28px,5vh,77px)!important}
 }
 @media (min-width:901px){.cz-d{display:none}}
 .st-fn{margin-top:8px!important;font-size:11.5px!important;line-height:1.4!important;color:#8A8B99!important;letter-spacing:.01em;font-weight:400!important}
+/* photo corner: own layer so the chamfer clips the shade cleanly */
+.op-rv{will-change:clip-path,transform;transform:translateZ(0)}
 
 /* ===== In the room: Who we serve white cards straddling photo edge ===== */
 .ws.wb{background:#F5F5F9!important;clip-path:none!important;-webkit-clip-path:none!important;padding-bottom:0!important;overflow:visible}
