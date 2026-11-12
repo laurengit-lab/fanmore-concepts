@@ -1697,7 +1697,7 @@ d.querySelectorAll('[data-io]').forEach(function(x){io.observe(x)});
 
 /* chip cycles quietly through moments */
 var M=[['+50 pts','Checked in near the arena'],['+15 pts','Halftime poll answered'],['+40 pts','Goal watched with friends']],mi=0,tx=d.querySelector('.chip .tx');
-if(!reduce)setInterval(function(){if(!d.querySelector('.op-ph.in'))return;var cur=tx.firstElementChild;mi=(mi+1)%M.length;var n=d.createElement('span');n.className='pre';n.innerHTML='<b data-n="'+M[mi][0]+'">'+z(M[mi][0])+'</b><small>'+M[mi][1]+'</small>';tx.appendChild(n);n.offsetWidth;n.className='';cur.classList.add('out');setTimeout(function(){cur.remove()},700)},4200);
+if(!reduce)setInterval(function(){if(d.hidden||!d.querySelector('.op-ph.in'))return;while(tx.children.length>1)tx.firstElementChild.remove();var cur=tx.firstElementChild;cur.classList.remove('out');mi=(mi+1)%M.length;var n=d.createElement('span');n.className='pre';n.innerHTML='<b data-n="'+M[mi][0]+'">'+z(M[mi][0])+'</b><small>'+M[mi][1]+'</small>';tx.appendChild(n);n.offsetWidth;n.className='';cur.classList.add('out');setTimeout(function(){cur.remove()},700)},4200);
 
 /* smooth scroll */
 var lenis=null;
