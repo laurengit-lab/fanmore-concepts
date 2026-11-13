@@ -1177,10 +1177,7 @@ body.pg .sk-b h3{font-weight:700;letter-spacing:-.03em}
 @media (max-width:900px){.hero .hc{padding-top:150px}.sp{padding:72px var(--gx) 64px}.sp+.sp{padding-top:0}.sp-g{display:block}.sp-r{margin-top:40px}.sp-ls li{grid-template-columns:1fr;gap:6px;padding:20px 0}}
 #about,#how,#checkin,#serve,#news,#team,#contact{display:none!important}
 .nws{margin-top:clamp(48px,5vw,80px)!important}
-.nws .nw-t{display:flex;flex-direction:column;gap:6px}
-.nws .nw-t small{font-size:15px;font-weight:400;line-height:1.5;color:var(--mut)}
-.nws-tg{font-style:normal;font-size:12.5px;font-weight:600;letter-spacing:.02em;color:var(--navy)}
-.nws .nw-d{color:#9A9BAA}
+.nws a:focus{outline:none}.nws a:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
 /* ===== News / Leadership / Contact / Footer ===== */
 .up{opacity:0;transform:translateY(24px);transition:opacity .9s,transform 1.2s var(--ease)}
 .up.in{opacity:1;transform:none}
@@ -1577,12 +1574,15 @@ body.pg .sk-b h3{font-weight:700;letter-spacing:-.03em}
 <section class="sp first" id="latest" aria-labelledby="ln-title">
   <div class="op-tag" data-io><svg viewBox="0 0 384 308" fill="currentColor" aria-hidden="true"><path d="M0 0L154 154L0 308L230 308L384 154L230 0Z"/></svg>Latest news<span class="bar"></span></div>
   <h2 id="ln-title" class="hd2" data-lit><span class="lt">What&rsquo;s new</span><br>at FanMore.</h2>
-  <div class="nw-rel nws"><ul>
-<li class="up" data-io><a href="#" onclick="return false"><span class="nw-d">Placeholder</span><span class="nw-t"><em class="nws-tg">Partnership</em>Team partnership announcement headline goes here<small>A short summary of a new team or league joining FanMore.</small></span><span class="nw-go">Read more <i class="nw-bx"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10l6-6M5 4h5v5"/></svg></i></span></a></li>
-<li class="up" data-io><a href="#" onclick="return false"><span class="nw-d">Placeholder</span><span class="nw-t"><em class="nws-tg">Product</em>Product launch or feature update headline goes here<small>A short summary of what fans can now do with FanMore.</small></span><span class="nw-go">Read more <i class="nw-bx"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10l6-6M5 4h5v5"/></svg></i></span></a></li>
-<li class="up" data-io><a href="#" onclick="return false"><span class="nw-d">Placeholder</span><span class="nw-t"><em class="nws-tg">Company</em>Company milestone headline goes here<small>A short summary of a hire, award or growth milestone.</small></span><span class="nw-go">Read more <i class="nw-bx"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10l6-6M5 4h5v5"/></svg></i></span></a></li>
-<li class="up" data-io><a href="#" onclick="return false"><span class="nw-d">Placeholder</span><span class="nw-t"><em class="nws-tg">Partnership</em>Venue or brand partner announcement headline goes here<small>A short summary of a new partner and what it means for fans.</small></span><span class="nw-go">Read more <i class="nw-bx"><svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 10l6-6M5 4h5v5"/></svg></i></span></a></li>
-  </ul></div>
+  <div class="nw-rel nws">
+    <h3 class="nw-h up" data-io>Company news</h3>
+    <ul>
+<li class="up" data-io><a href="news-article.html"><span class="nw-d">Nov 4, 2026</span><span class="nw-t">Team partnership announcement headline goes here</span><span class="nw-go">Read more <i class="nw-bx"><svg class="ex" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4"/></svg></i></span></a></li>
+<li class="up" data-io><a href="news-article.html"><span class="nw-d">Oct 21, 2026</span><span class="nw-t">Product launch or feature update headline goes here</span><span class="nw-go">Read more <i class="nw-bx"><svg class="ex" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4"/></svg></i></span></a></li>
+<li class="up" data-io><a href="news-article.html"><span class="nw-d">Oct 8, 2026</span><span class="nw-t">Company milestone headline goes here</span><span class="nw-go">Read more <i class="nw-bx"><svg class="ex" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4"/></svg></i></span></a></li>
+<li class="up" data-io><a href="news-article.html"><span class="nw-d">Sep 24, 2026</span><span class="nw-t">Venue or brand partner announcement headline goes here</span><span class="nw-go">Read more <i class="nw-bx"><svg class="ex" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4"/></svg></i></span></a></li>
+    </ul>
+  </div>
   <a class="sp-xl up" data-io href="investors.html">Looking for financial news releases? Visit Investors <svg class="ar" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M1 7h11M8 3l4 4-4 4"/></svg></a>
 </section>
 <section class="ct" id="contact" aria-labelledby="ct-title">
