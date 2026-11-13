@@ -5,8 +5,11 @@
 <meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="apple-touch-icon.png"><script>(function(){var d=document.documentElement;function f(){var W=innerWidth,H=innerHeight,z=1;
 if(W>=1024){z=Math.min(1,Math.max(.8,Math.min(W/1600,H/950)))}
 z=Math.round(z*1000)/1000;d.style.zoom=z===1?'':z;window.fmZoom=z;
-d.style.setProperty('--zvh',(H/100/z)+'px');d.style.setProperty('--zvw',(d.clientWidth/100/z)+'px')}
-f();addEventListener('resize',f)})();</script>
+if(z<1){d.style.setProperty('--zvh',(H/100/z)+'px');d.style.setProperty('--zvw',(d.clientWidth/100/z)+'px')}else{d.style.removeProperty('--zvh');d.style.removeProperty('--zvw')}}
+f();addEventListener('resize',f);
+/* iOS Safari can leave the hero ticker frozen after its items are swapped in: restart it once the page has loaded */
+function tk(){document.querySelectorAll('.tk-u').forEach(function(u){u.style.animation='none';void u.offsetWidth;u.style.animation=''})}
+addEventListener('load',function(){setTimeout(tk,50)});addEventListener('pageshow',function(e){if(e.persisted)tk()})})();</script><style>html{overflow-x:clip}.rs-p .lb,.rs-p .rs-f,.rs-p hr{display:none!important}</style>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>FanMore Broadcast Dark</title>
@@ -37,7 +40,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* ================= HERO ================= */
-.hero{position:sticky;top:0;height:calc(100 * var(--zvh,1vh));min-height:620px;overflow:hidden;color:#fff;background:#05032a;z-index:0}
+.hero{position:sticky;top:0;height:calc(100 * var(--zvh,1svh));min-height:620px;overflow:hidden;color:#fff;background:#05032a;z-index:0}
 .hero-media{position:absolute;inset:-9% 0 0 0;transform:translate3d(0,calc(var(--p,0) * 8%),0) scale(calc(1 + var(--p,0) * .06));will-change:transform}
 .hero-media img{width:100%;height:100%;object-fit:cover;object-position:50% 46%;transform:scale(1.14);filter:saturate(1.05);transition:transform 2.8s var(--ease)}
 .is-in .hero-media img{transform:scale(1)}
@@ -975,7 +978,7 @@ body.pg .fq-tk{font-weight:700;letter-spacing:-.03em}
 .cm.on{visibility:visible;pointer-events:auto}
 .cm-bd{position:absolute;inset:0;background:rgba(7,4,31,.5);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);opacity:0;transition:opacity .45s var(--ease)}
 .cm.on .cm-bd{opacity:1}
-.cm-p{position:relative;width:min(600px,100%);max-height:calc(calc(100 * var(--zvh,1vh)) - 48px);overflow:auto;background:#fff;border-radius:20px;padding:clamp(32px,3.4vw,48px);box-shadow:0 60px 120px -40px rgba(7,4,31,.55);opacity:0;transform:translateY(28px) scale(.98);transition:opacity .45s var(--ease),transform .6s var(--ease)}
+.cm-p{position:relative;width:min(600px,100%);max-height:calc(calc(100 * var(--zvh,1dvh)) - 48px);overflow:auto;background:#fff;border-radius:20px;padding:clamp(32px,3.4vw,48px);box-shadow:0 60px 120px -40px rgba(7,4,31,.55);opacity:0;transform:translateY(28px) scale(.98);transition:opacity .45s var(--ease),transform .6s var(--ease)}
 .cm.on .cm-p{opacity:1;transform:none}
 .cm-hd{display:flex;align-items:center;justify-content:space-between;gap:24px}
 .cm-hd h2{font-family:var(--head);font-weight:700;font-size:clamp(26px,2.3vw,32px);letter-spacing:-.01em;color:var(--ink)}
@@ -992,7 +995,7 @@ body.cm-lock{overflow:hidden}
  .ct .ct-ls{margin-top:48px!important}
  .ct .ct-ls li{grid-template-columns:1fr;gap:4px;padding:22px 0!important}
  .cm{padding:0;place-items:end stretch}
- .cm-p{width:100%;max-height:calc(100 * var(--zvh,1vh));height:calc(100 * var(--zvh,1vh));border-radius:0;padding:24px 20px 32px;transform:translateY(40px)}
+ .cm-p{width:100%;max-height:calc(100 * var(--zvh,1dvh));height:calc(100 * var(--zvh,1dvh));border-radius:0;padding:24px 20px 32px;transform:translateY(40px)}
 }
 @media (prefers-reduced-motion:reduce){.cm-p,.cm-bd{transition:none}}
 /* ===== Broadcast: section tags in caps (In the room resets this in framed_wv) ===== */
@@ -1401,7 +1404,7 @@ body.pg .sk-b h3{font-weight:700;letter-spacing:-.03em}
 .fl-p i svg{display:block;width:9px;height:auto;fill:currentColor}
 .fl-hit{animation:flHit 1.6s var(--ease,ease)}
 @keyframes flHit{0%{box-shadow:0 0 0 0 rgba(63,205,252,0)}40%{box-shadow:0 0 0 2px rgba(63,205,252,.32)}100%{box-shadow:0 0 0 0 rgba(63,205,252,0)}}
-.rs-p .lb,.rs-p .rs-f,.rs-p hr{display:none!important}</style>
+</style>
 </head>
 <body>
 
