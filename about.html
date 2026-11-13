@@ -1179,9 +1179,10 @@ body.pg .sk-b h3{font-weight:700;letter-spacing:-.03em}
 .co-tx{padding-top:clamp(8px,4vw,64px)}
 .co-tx p:not(.sp-ld){font-size:17px;line-height:1.7;color:var(--mut);max-width:36em;margin-top:18px}
 .co-tx .sp-ld+p{margin-top:28px}
-.co-f{display:grid;grid-template-columns:1fr 1fr 1fr 1.6fr;gap:24px;margin-top:clamp(64px,6vw,96px);border-top:1px solid var(--hair);padding-top:24px}
-.co-f dt{font-size:13px;color:var(--mut)}
-.co-f dd{margin-top:6px;font-size:17px;font-weight:600;line-height:1.4;color:#14141C}
+.co-f{margin-top:clamp(48px,4.5vw,72px);max-width:520px;border-bottom:1px solid var(--hair)}
+.co-f div{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:baseline;padding:20px 0;border-top:1px solid var(--hair)}
+.co-f dt{font-size:14px;color:var(--mut)}
+.co-f dd{font-size:17px;font-weight:600;line-height:1.45;color:#14141C}
 #leadership{border-top:1px solid var(--hair);margin:0 var(--gx);padding-left:0!important;padding-right:0!important}
 .lg{margin-top:clamp(64px,6vw,96px)}
 .lg-h{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding-bottom:16px;border-bottom:1px solid var(--hair)}
@@ -1241,7 +1242,7 @@ html.bd-open{overflow:hidden}
 .ab-tg button{padding:7px 12px;border:0;border-radius:4px;background:none;color:rgba(255,255,255,.75);font:inherit;font-size:13px;font-weight:600;cursor:pointer}
 .ab-tg button[aria-pressed="true"]{background:#fff;color:#101018}
 @media (max-width:900px){
-.co-f{grid-template-columns:1fr 1fr;gap:20px 16px}.co-f div:last-child{grid-column:1 / -1}
+.co-f{margin-top:40px;max-width:none}.co-f div{grid-template-columns:120px 1fr;gap:16px;padding:16px 0}.co-f dd{font-size:16px}
 .lg-h{display:block}.lg-n{margin-top:6px}
 .pc-bx{transform:none;width:36px!important;height:36px!important}
 .pc-n{font-size:16px;margin-top:12px}.pc-r{font-size:13.5px}
@@ -1651,6 +1652,12 @@ html.bd-open{overflow:hidden}
     <div class="sp-l">
       <div class="op-tag" data-io><svg viewBox="0 0 384 308" fill="currentColor" aria-hidden="true"><path d="M0 0L154 154L0 308L230 308L384 154L230 0Z"/></svg>Company<span class="bar"></span></div>
       <h2 id="co-title" class="hd2" data-lit><span class="lt">One rewards program.</span><br>Value for everyone.</h2>
+      <dl class="co-f up" data-io>
+        <div><dt>Company</dt><dd>FanMore Technologies Inc.</dd></div>
+        <div><dt>Headquarters</dt><dd>Vancouver, Canada</dd></div>
+        <div><dt>Founded</dt><dd>Lorem ipsum</dd></div>
+        <div><dt>Status</dt><dd>Private &middot; proposed qualifying transaction with Falconstar Ventures Inc.</dd></div>
+      </dl>
     </div>
     <div class="sp-r co-tx">
       <p class="sp-ld up" data-io>FanMore is a loyalty rewards platform built for professional sports and entertainment. It rewards fans for the loyalty they already show, in the building, at home, at the bar or on the go, and turns that loyalty into lasting value for teams, leagues, venues and partners.</p>
@@ -1659,12 +1666,6 @@ html.bd-open{overflow:hidden}
       <p class="up" data-io>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
     </div>
   </div>
-  <dl class="co-f up" data-io>
-    <div><dt>Company</dt><dd>FanMore Technologies Inc.</dd></div>
-    <div><dt>Headquarters</dt><dd>Vancouver, Canada</dd></div>
-    <div><dt>Founded</dt><dd>Lorem ipsum</dd></div>
-    <div><dt>Status</dt><dd>Private &middot; proposed qualifying transaction with Falconstar Ventures Inc.</dd></div>
-  </dl>
 </section>
 <section class="ld" id="leadership" aria-labelledby="le-title">
   <div class="ld-hd">
