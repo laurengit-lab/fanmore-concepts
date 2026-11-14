@@ -9,7 +9,8 @@ if(z<1){d.style.setProperty('--zvh',(H/100/z)+'px');d.style.setProperty('--zvw',
 f();addEventListener('resize',f);
 /* iOS Safari can leave the hero ticker frozen after its items are swapped in: restart it once the page has loaded */
 function tk(){document.querySelectorAll('.tk-u').forEach(function(u){u.style.animation='none';void u.offsetWidth;u.style.animation=''})}
-addEventListener('load',function(){setTimeout(tk,50)});addEventListener('pageshow',function(e){if(e.persisted)tk()})})();</script><style>html{overflow-x:clip}.rs-p .lb,.rs-p .rs-f,.rs-p hr{display:none!important}</style>
+addEventListener('load',function(){setTimeout(tk,50)});addEventListener('pageshow',function(e){if(e.persisted)tk()})})();</script><style>html{overflow-x:clip}
+/* mobile carousels: sideways only, no vertical wobble inside the strip */.cz{overflow-y:hidden!important;overscroll-behavior-x:contain}.rs-p .lb,.rs-p .rs-f,.rs-p hr{display:none!important}</style>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>FanMore Investors</title>

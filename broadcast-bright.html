@@ -9,7 +9,8 @@ if(z<1){d.style.setProperty('--zvh',(H/100/z)+'px');d.style.setProperty('--zvw',
 f();addEventListener('resize',f);
 /* iOS Safari can leave the hero ticker frozen after its items are swapped in: restart it once the page has loaded */
 function tk(){document.querySelectorAll('.tk-u').forEach(function(u){u.style.animation='none';void u.offsetWidth;u.style.animation=''})}
-addEventListener('load',function(){setTimeout(tk,50)});addEventListener('pageshow',function(e){if(e.persisted)tk()})})();</script><style>html{overflow-x:clip}.rs-p .lb,.rs-p .rs-f,.rs-p hr{display:none!important}</style>
+addEventListener('load',function(){setTimeout(tk,50)});addEventListener('pageshow',function(e){if(e.persisted)tk()})})();</script><style>html{overflow-x:clip}
+/* mobile carousels: sideways only, no vertical wobble inside the strip */.cz{overflow-y:hidden!important;overscroll-behavior-x:contain}.rs-p .lb,.rs-p .rs-f,.rs-p hr{display:none!important}</style>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>FanMore Broadcast Bright</title>
@@ -1891,7 +1892,9 @@ return[(W-dw)*ox+dw*px/100,(H-dh)*oy+dh*py/100,W,H]}
 var last=-1,busy=[],ri=Math.floor(Math.random()*8),R=[['+25','Checked in'],['+15','Bought a drink'],['+10','Halftime poll'],['+50','Bought a jersey'],['+20','Shared a goal'],['+15','Grabbed a snack'],['+40','Referred a friend'],['+25','Scanned a ticket']];
 function pop(){if(document.hidden)return;var hero=document.querySelector('.hero');if(hero&&hero.getBoundingClientRect().bottom<80)return;
 var hr=L.getBoundingClientRect(),cx=document.querySelector('.hero .tk')||document.querySelector('.hero .hc'),cr=cx?cx.getBoundingClientRect():hr,cl=Math.max(cr.left-hr.left,0)+96,cR=Math.min(cr.right-hr.left,hr.width)-96;
-var ok=[];A.forEach(function(a,i){if(busy.indexOf(i)>-1)return;var q=pos(a[0],a[1]);if(q[0]<cl||q[0]>cR||q[1]<120||hit(q[0],q[1]))return;ok.push([i,q])});if(ok.length>1)ok=ok.filter(function(o){return o[0]!==last});if(!ok.length)return;var c=ok[Math.floor(Math.random()*ok.length)],k=c[0];last=k;
+var c;if(innerWidth<=900){/* phones: pop in the open photo area between the nav and the headline */var tn=document.querySelector('.hero .tn'),h1=document.querySelector('.hero .hc h1'),lp=document.querySelector('.hero .hc p'),tk=document.querySelector('.hero .tk'),yt=(tn?tn.getBoundingClientRect().bottom-hr.top:80)+56,yb=(h1?h1.getBoundingClientRect().top-hr.top:hr.height*.45)-14,zt=(lp?lp.getBoundingClientRect().bottom-hr.top:hr.height*.7)+52,zb=(tk?tk.getBoundingClientRect().top-hr.top:hr.height)-14;
+/* slots: two above the headline, one between the intro and the ticker (bottom-anchored y) */
+var MS=[[.3,yt,yb,0],[.68,yt,yb,1],[.5,zt,zb,.5]];var fr=[0,1,2].filter(function(i){return busy.indexOf(100+i)<0&&100+i!==last&&MS[i][2]-MS[i][1]>=(i<2?(busy.indexOf(i?100:101)>-1?44:0):0)});if(!fr.length)return;var mi=fr[Math.floor(Math.random()*fr.length)],m=MS[mi];c=[100+mi,[hr.width*m[0],m[1]+(m[2]-m[1])*m[3]]]}else{var ok=[];A.forEach(function(a,i){if(busy.indexOf(i)>-1)return;var q=pos(a[0],a[1]);if(q[0]<cl||q[0]>cR||q[1]<120||hit(q[0],q[1]))return;ok.push([i,q])});if(ok.length>1)ok=ok.filter(function(o){return o[0]!==last});if(!ok.length)return;c=ok[Math.floor(Math.random()*ok.length)]}var k=c[0];last=k;
 var a=A[k],p=c[1];
 var e=document.createElement('span');e.className='hpt c'+(ci++%3);var w=R[ri++%R.length];e.innerHTML='<i>'+CH+'</i><b>'+w[0]+' pts</b><span class="r">'+w[1]+'</span>';e.style.left=p[0]+'px';e.style.top=p[1]+'px';L.appendChild(e);busy.push(k);
 requestAnimationFrame(function(){requestAnimationFrame(function(){e.classList.add('on')})});

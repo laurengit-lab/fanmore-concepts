@@ -9,7 +9,8 @@ if(z<1){d.style.setProperty('--zvh',(H/100/z)+'px');d.style.setProperty('--zvw',
 f();addEventListener('resize',f);
 /* iOS Safari can leave the hero ticker frozen after its items are swapped in: restart it once the page has loaded */
 function tk(){document.querySelectorAll('.tk-u').forEach(function(u){u.style.animation='none';void u.offsetWidth;u.style.animation=''})}
-addEventListener('load',function(){setTimeout(tk,50)});addEventListener('pageshow',function(e){if(e.persisted)tk()})})();</script><style>html{overflow-x:clip}.rs-p .lb,.rs-p .rs-f,.rs-p hr{display:none!important}</style>
+addEventListener('load',function(){setTimeout(tk,50)});addEventListener('pageshow',function(e){if(e.persisted)tk()})})();</script><style>html{overflow-x:clip}
+/* mobile carousels: sideways only, no vertical wobble inside the strip */.cz{overflow-y:hidden!important;overscroll-behavior-x:contain}.rs-p .lb,.rs-p .rs-f,.rs-p hr{display:none!important}</style>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>FanMore Game Day Dark</title>
@@ -1506,7 +1507,7 @@ body.live .hf .tally{transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
  .is-in .hf{clip-path:inset(0 round 14px)}
  .hero-shade{background:linear-gradient(180deg,rgba(5,3,42,.35) 0%,rgba(5,3,42,.1) 26%,rgba(5,3,42,.35) 46%,rgba(5,3,42,.86) 72%,rgba(5,3,42,.95) 100%)}
  .hc{padding:0 16px;bottom:calc(12px + 106px + 26px);top:auto}
- .hf .chips{display:none}
+ .hchip{gap:7px;padding:6px 10px 6px 6px}.hchip b{font-size:12.5px}.hchip span{font-size:11.5px}.hchip i{width:19px;height:19px}.hchip i svg{width:10px;height:10px}
  .hf .tally{left:12px;right:12px;bottom:12px;min-width:0;padding:14px 16px}
  .hf .tally strong{font-size:26px}
 }
@@ -1995,11 +1996,15 @@ const Dopt=(()=>{
     d.innerHTML=`<i><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="12" height="12" viewBox="0 0 85.4908 85.4908"><defs><clipPath id="clip-0"><path clip-rule="nonzero" d="M 0 0 L 84.984375 0 L 84.984375 84.984375 L 0 84.984375 Z M 0 0 "/></clipPath></defs><g clip-path="url(#clip-0)"><path fill-rule="nonzero" fill="rgb(9.411621%, 0%, 87.451172%)" fill-opacity="1" d="M 27.992188 0 L 28 27.992188 L 0 27.992188 L 0.0078125 56.988281 L 28 56.996094 L 28 84.976562 L 56.992188 84.984375 L 56.992188 56.988281 L 84.984375 56.996094 L 84.984375 27.992188 L 57 27.988281 L 56.992188 0 Z M 27.992188 0 "/></g></svg></i><b aria-label="${pts}">${String(pts).replace(/0/g,'O')}</b><span>${txt}</span>`;
     chips.appendChild(d);
     const fromBox=()=>{const r=d.querySelector('i').getBoundingClientRect(), m=media.getBoundingClientRect(); return [r.left-m.left+r.width/2, r.top-m.top+r.height/2];};
-    setTimeout(()=>{const [bx,by]=fromBox(); burstPx(bx,by,12,.8);},180);
-    setTimeout(()=>{const [bx,by]=fromBox(); streamPx(bx,by);},750); const w=d.offsetWidth; const mr=media.getBoundingClientRect(), hr=el.getBoundingClientRect(); const offx=mr.left-hr.left, offy=mr.top-hr.top; const cr=el.querySelector('.hc h1').getBoundingClientRect(); const h=d.offsetHeight; const x0=Math.min(px+offx-w/2, hr.width-w-40); let y0=py+offy-86; const cT=cr.top-hr.top, cR=cr.right-hr.left; if(x0<cR && y0+h>cT-14) y0=cT-h-14;
+    setTimeout(()=>{if(!d.isConnected)return;const [bx,by]=fromBox(); burstPx(bx,by,12,.8);},180);
+    setTimeout(()=>{if(!d.isConnected)return;const [bx,by]=fromBox(); streamPx(bx,by);},750); const w=d.offsetWidth; const mr=media.getBoundingClientRect(), hr=el.getBoundingClientRect(); const offx=mr.left-hr.left, offy=mr.top-hr.top; const cr=el.querySelector('.hc h1').getBoundingClientRect(); const h=d.offsetHeight; let x0m=null; const x0c=Math.min(px+offx-w/2, hr.width-w-40); let y0=py+offy-86; const cT=cr.top-hr.top, cR=cr.right-hr.left; if(x0c<cR && y0+h>cT-14) y0=cT-h-14;
+    /* phones: the photo anchors fall outside the narrow frame, so place the chips in the open photo area above the headline */
+    if(innerWidth<=900){const top=Math.max(mr.top-hr.top,0)+70, bot=cT-h-18, sp=Math.max(0,bot-top), n=Math.max(1,Math.min(4,Math.floor(sp/(h+12))+1));
+      if(i>=n){d.remove();return;} /* only as many chips as fit above the headline on this screen */
+      x0m=Math.max(14,Math.min(hr.width-w-14,(hr.width-w)*(i%2?.92:.06))); y0=top+(n>1?sp*i/(n-1):0);}
     const t0=performance.now(); (function an(now){const k=(now-t0)/5600; if(k>=1){d.remove();return;}
       const a=k<.06?easeOut(k/.06):k>.86?1-easeIO((k-.86)/.14):1; const lift=spring(Math.min(1,k*5))*16+easeOut(k)*18;
-      d.style.opacity=a; d.style.transform=`translate(${x0}px,${y0-lift}px) scale(${.9+.1*easeOut(Math.min(1,k*5))})`; requestAnimationFrame(an);})(t0);
+      d.style.opacity=a; d.style.transform=`translate(${x0m!==null?x0m:x0c}px,${y0-lift}px) scale(${.9+.1*easeOut(Math.min(1,k*5))})`; requestAnimationFrame(an);})(t0);
   }
   function streamPx(sx,sy){ const r=tally.getBoundingClientRect(), mr=media.getBoundingClientRect();
     const tx=r.left-mr.left+40, ty=r.top-mr.top+18; for(let i=0;i<7;i++) streams.push({sx,sy,tx,ty,cx:(sx+tx)/2+rnd(-60,60),cy:Math.min(sy,ty)-rnd(60,160),k:-i*.06,sp:rnd(.55,.8)});}
