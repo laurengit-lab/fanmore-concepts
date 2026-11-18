@@ -1489,6 +1489,9 @@ html.sp-gd #ir-contact{background:#fff!important}
 @media (prefers-reduced-motion:reduce){
  *,*::before,*::after{transition-duration:.01s!important;animation:none!important;transition-delay:0s!important}
 }
+
+/* Nov 17 (Lauren): the cropped phone sits on the photo band below it */
+@media (min-width:901px){.ws.dm .ws-ph{align-self:end}}
 </style>
 </head>
 <body>
@@ -1931,7 +1934,7 @@ d.addEventListener('click',function(e){if(!rs.contains(e.target)){rs.classList.r
  wsFrame=function(){};
  function fmt(n,pre){return pre+String(n).replace(/0/g,'O')}
  function count(v,delay){var pre=v.dataset.pre,t=+v.dataset.to;v.textContent=fmt(0,pre);setTimeout(function(){var t0=performance.now(),D=t>9?1400:900;(function st(now){var k=Math.min(1,(now-t0)/D),e=1-Math.pow(1-k,3);v.textContent=fmt(Math.round(t*e),pre);if(k<1)requestAnimationFrame(st)})(t0)},delay)}
- function fit(){if(innerWidth<=900){ph.style.removeProperty('--z');var q=ph.querySelector('.ph');ph.style.setProperty('--vis',Math.round(q.getBoundingClientRect().height*.74)+'px');return}var p=ph.querySelector('.ph');ph.style.setProperty('--z',1);var h=p.getBoundingClientRect().height,H=pw.getBoundingClientRect().bottom-ph.getBoundingClientRect().top;var W=pw.getBoundingClientRect().left-ph.getBoundingClientRect().left-40,zw=W/p.getBoundingClientRect().width;var z=Math.max(.75,Math.min(1.5,zw));if(d.documentElement.classList.contains('fit'))z=Math.max(.6,Math.min(z,innerHeight*.8/h));ph.style.setProperty('--z',z.toFixed(3));var r=pw.querySelector('.pw-r'),li=[].slice.call(r.children),sum=0;li.forEach(function(x){sum+=x.getBoundingClientRect().height});var bp=parseFloat(getComputedStyle(pw).paddingBottom)||0;var need=(r.getBoundingClientRect().top-ph.getBoundingClientRect().top)+sum+56*(li.length-1)+bp;var full=h*z;ph.style.setProperty('--vis',Math.round(Math.min(full*.8,Math.max(full*.56,need)))+'px')}
+ function fit(){if(innerWidth<=900){ph.style.removeProperty('--z');var q=ph.querySelector('.ph');ph.style.setProperty('--vis',Math.round(q.getBoundingClientRect().height*.74)+'px');return}var p=ph.querySelector('.ph');ph.style.setProperty('--z',1);var h=p.getBoundingClientRect().height,H=pw.getBoundingClientRect().bottom-ph.getBoundingClientRect().top;var W=pw.getBoundingClientRect().left-ph.getBoundingClientRect().left-40,zw=W/p.getBoundingClientRect().width;var z=Math.max(.75,Math.min(1.5,zw));if(d.documentElement.classList.contains('fit'))z=Math.max(.6,Math.min(z,innerHeight*.8/h));ph.style.setProperty('--z',z.toFixed(3));var r=pw.querySelector('.pw-r'),li=[].slice.call(r.children),sum=0;li.forEach(function(x){sum+=x.getBoundingClientRect().height});var bp=parseFloat(getComputedStyle(pw).paddingBottom)||0;var need=(r.getBoundingClientRect().top-ph.getBoundingClientRect().top)+sum+56*(li.length-1)+bp;var full=h*z;ph.style.setProperty('--vis',Math.round(Math.min(full*.92,Math.max(full*.56,need)))+'px')}/* Nov 17 (Lauren): on short laptop screens the cropped phone stopped short of the photo band; let it run taller and sit on the band */
  function play(){if(done)return;done=true;its.forEach(function(it,i){setTimeout(function(){it.classList.add('in');count(it.querySelector('.v'),200)},reduce?0:200+i*320)})}
  its.forEach(function(it){var v=it.querySelector('.v');v.textContent=fmt(0,v.dataset.pre)});
  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)play()})},{threshold:innerWidth>900?.08:.1}).observe(innerWidth>900?ph:pw);

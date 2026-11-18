@@ -1421,6 +1421,9 @@ html.hday .hero.bc .hc h1,html.hday .hero.bc .hc p{text-shadow:0 2px 24px rgba(5
  *,*::before,*::after{transition-duration:.01s!important;animation:none!important;transition-delay:0s!important}
 }
 
+/* Nov 17 (Lauren): the cropped phone sits on the photo band below it */
+@media (min-width:901px){.ws.dm .ws-ph{align-self:end}}
+
 /* check-in flow pills */
 .fl-p{position:absolute;z-index:30;left:0;top:0;display:inline-flex;align-items:center;gap:9px;padding:9px 14px 9px 10px;border-radius:3px;background:#fff;color:var(--ink,#0A0A1F);font-size:14px;font-weight:600;line-height:1;white-space:nowrap;box-shadow:0 10px 28px -10px rgba(5,3,42,.35),0 0 0 1px rgba(5,3,42,.06);pointer-events:none;will-change:transform,opacity}
 .fl-p i{display:grid;place-items:center;width:18px;height:18px;border-radius:2px;background:var(--c);color:#fff}
@@ -1957,7 +1960,7 @@ d.addEventListener('click',function(e){if(!rs.contains(e.target)){rs.classList.r
  wsFrame=function(){};
  function fmt(n,pre){return pre+String(n).replace(/0/g,'O')}
  function count(v,delay){var pre=v.dataset.pre,t=+v.dataset.to;v.textContent=fmt(0,pre);setTimeout(function(){var t0=performance.now(),D=t>9?1400:900;(function st(now){var k=Math.min(1,(now-t0)/D),e=1-Math.pow(1-k,3);v.textContent=fmt(Math.round(t*e),pre);if(k<1)requestAnimationFrame(st)})(t0)},delay)}
- function fit(){if(innerWidth<=900){ph.style.removeProperty('--z');var q=ph.querySelector('.ph');ph.style.setProperty('--vis',Math.round(q.getBoundingClientRect().height*.74)+'px');return}var p=ph.querySelector('.ph');ph.style.setProperty('--z',1);var h=p.getBoundingClientRect().height,H=pw.getBoundingClientRect().bottom-ph.getBoundingClientRect().top;var W=pw.getBoundingClientRect().left-ph.getBoundingClientRect().left-40,zw=W/p.getBoundingClientRect().width;var z=Math.max(.75,Math.min(1.5,zw));if(d.documentElement.classList.contains('fit'))z=Math.max(.6,Math.min(z,innerHeight*.8/h));ph.style.setProperty('--z',z.toFixed(3));var r=pw.querySelector('.pw-r'),li=[].slice.call(r.children),sum=0;li.forEach(function(x){sum+=x.getBoundingClientRect().height});var bp=parseFloat(getComputedStyle(pw).paddingBottom)||0;var need=(r.getBoundingClientRect().top-ph.getBoundingClientRect().top)+sum+56*(li.length-1)+bp;var full=h*z;ph.style.setProperty('--vis',Math.round(Math.min(full*.8,Math.max(full*.56,need)))+'px')}
+ function fit(){if(innerWidth<=900){ph.style.removeProperty('--z');var q=ph.querySelector('.ph');ph.style.setProperty('--vis',Math.round(q.getBoundingClientRect().height*.74)+'px');return}var p=ph.querySelector('.ph');ph.style.setProperty('--z',1);var h=p.getBoundingClientRect().height,H=pw.getBoundingClientRect().bottom-ph.getBoundingClientRect().top;var W=pw.getBoundingClientRect().left-ph.getBoundingClientRect().left-40,zw=W/p.getBoundingClientRect().width;var z=Math.max(.75,Math.min(1.5,zw));if(d.documentElement.classList.contains('fit'))z=Math.max(.6,Math.min(z,innerHeight*.8/h));ph.style.setProperty('--z',z.toFixed(3));var r=pw.querySelector('.pw-r'),li=[].slice.call(r.children),sum=0;li.forEach(function(x){sum+=x.getBoundingClientRect().height});var bp=parseFloat(getComputedStyle(pw).paddingBottom)||0;var need=(r.getBoundingClientRect().top-ph.getBoundingClientRect().top)+sum+56*(li.length-1)+bp;var full=h*z;ph.style.setProperty('--vis',Math.round(Math.min(full*.92,Math.max(full*.56,need)))+'px')}/* Nov 17 (Lauren): on short laptop screens the cropped phone stopped short of the photo band; let it run taller and sit on the band */
  function play(){if(window.fmPlay&&window.fmPlay(its,count))return;if(done)return;done=true;its.forEach(function(it,i){setTimeout(function(){it.classList.add('in');count(it.querySelector('.v'),200)},reduce?0:200+i*320)})}
  its.forEach(function(it){var v=it.querySelector('.v');v.textContent=fmt(0,v.dataset.pre)});
  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)play();else if(window.fmOut)window.fmOut(its,fmt)})},{threshold:innerWidth>900?.08:.1}).observe(innerWidth>900?ph:pw);
@@ -2199,6 +2202,7 @@ var RXCITY = (function () {
       HW.push({ pts: pts, lights: lights }); }); })();
 
   /* Nov 18 (Lauren: the pulled-back view felt plain): a fine field of faint lights around the city, densest near it */
+  var DUSTI = [[], [], []]; for (var di = 0; di < 900; di++) { var a4 = r2() * 6.2832, rr4 = 120 + Math.pow(r2(), .7) * 760, k4 = r2(); DUSTI[k4 < .07 ? 2 : k4 < .25 ? 1 : 0].push([Math.cos(a4) * rr4 * 1.25, -10 + Math.sin(a4) * rr4]); } /* Nov 17: no hard dark hole where the city sits when zoomed far out */
   var DUST = [[], [], []]; for (var dq = 0; dq < 7000; dq++) { var a3 = r2() * 6.2832, rr3 = 850 + Math.pow(r2(), 2.3) * 9500, k3 = r2(); DUST[k3 < .07 ? 2 : k3 < .25 ? 1 : 0].push([Math.cos(a3) * rr3 * 1.25, -10 + Math.sin(a3) * rr3]); }
 
   var LOGO = new Image(); LOGO.src = window.__RXLOGO || '';
@@ -2294,6 +2298,7 @@ var RXCITY = (function () {
       var ds0 = Math.max(px * 1.3, .8); cx.beginPath(); HW.forEach(function (h) { h.lights.forEach(function (l) { cx.rect(X(l[0]) - ds0 / 2, Y(l[1]) - ds0 / 2, ds0, ds0); }); }); cx.fillStyle = 'rgba(255,214,150,' + (.45 * rB) + ')'; cx.fill();
       ['rgba(170,180,255,', 'rgba(63,205,252,', 'rgba(255,90,120,'].forEach(function (col, cc) { cx.beginPath(); TOWN[cc].forEach(function (d) { cx.rect(X(d[0]) - ds0 / 2, Y(d[1]) - ds0 / 2, ds0, ds0); }); cx.fillStyle = col + ((cc ? .6 : .42) * rB) + ')'; cx.fill(); });
       var rD = Math.max(0, Math.min(1, (1.2 - kk) / .35)), ds1 = ds0 * 1.25; ['rgba(150,160,255,', 'rgba(63,205,252,', 'rgba(255,200,140,'].forEach(function (col, cc) { cx.beginPath(); DUST[cc].forEach(function (d) { cx.rect(X(d[0]) - ds1 / 2, Y(d[1]) - ds1 / 2, ds1, ds1); }); cx.fillStyle = col + ((cc ? .55 : .36) * rD) + ')'; cx.fill(); });
+      if (rA > .01) ['rgba(150,160,255,', 'rgba(63,205,252,', 'rgba(255,200,140,'].forEach(function (col, cc) { cx.beginPath(); DUSTI[cc].forEach(function (d) { cx.rect(X(d[0]) - ds1 / 2, Y(d[1]) - ds1 / 2, ds1, ds1); }); cx.fillStyle = col + ((cc ? .5 : .32) * rA) + ')'; cx.fill(); }); /* fills the city footprint softly in the region view */
       var dcol = ['rgba(190,200,255,', 'rgba(63,205,252,', 'rgba(255,60,95,'], ds = Math.max(px * 1.6, 1);
       [0, 1, 2].forEach(function (cc) { cx.beginPath(); REG.forEach(function (c) { c.dots.forEach(function (d) { if (d[2] === cc) cx.rect(X(d[0]) - ds / 2, Y(d[1]) - ds / 2, ds, ds); }); }); cx.fillStyle = dcol[cc] + (.55 * rA) + ')'; cx.fill(); });
       REG.forEach(function (c) { if (c.home) return; var gx = X(c.gx), gy = Y(c.gy), rr = 700 * c.w; var hg = cx.createRadialGradient(gx, gy, 0, gx, gy, rr); hg.addColorStop(0, 'rgba(90,110,255,' + (.28 * rA) + ')'); hg.addColorStop(1, 'rgba(90,110,255,0)'); cx.fillStyle = hg; cx.fillRect(gx - rr, gy - rr, rr * 2, rr * 2); });
@@ -2418,7 +2423,7 @@ var LCOL = [{op:'lighter', g:'rgba(63,205,252,.5)', ga:.22, c:'rgba(170,228,255,
     if (!force && W === this.W && Math.abs(H - this.H) < 2) return; this.W = W; this.H = H;
     var mob = MOB(), T = this.T = mob ? [.5, .72] : DRAWV ? [.68, .6] : [.58, .66], D = this.D; this.T0 = T.slice();
     function cover(S) { return Math.max(T[0] * W / (S[0] * IW), (1 - T[0]) * W / ((1 - S[0]) * IW), T[1] * H / (S[1] * IH), (1 - T[1]) * H / ((1 - S[1]) * IH)) * 1.02; }
-    if (DRAWV) { this.cF = cover(D.SC); this.z0 = mob ? 1.15 : 2.1; this.zE = mob ? .7 : 1; this.zR = (mob ? W / 13000 : W / 17000) / this.cF; var dp = Math.min(devicePixelRatio || 1, 2); this.bg.width = Math.round(W * dp); this.bg.height = Math.round(H * dp); this.cv.width = Math.round(W * dp); this.cv.height = Math.round(H * dp); this.dpr = dp; this.lastZ = -1; return; }
+    if (DRAWV) { this.cF = cover(D.SC); this.z0 = mob ? 1.42 : 2.1; /* Nov 17 (Lauren): bigger ballpark at the start on phones */ this.zE = mob ? .7 : 1; this.zR = (mob ? W / 13000 : W / 17000) / this.cF; var dp = Math.min(devicePixelRatio || 1, 2); this.bg.width = Math.round(W * dp); this.bg.height = Math.round(H * dp); this.cv.width = Math.round(W * dp); this.cv.height = Math.round(H * dp); this.dpr = dp; this.lastZ = -1; return; }
     this.cA = cover(D.SA); this.cB = cover(D.SB); this.cF = cover(D.SC); this.z0 = this.cA * D.fA / (this.cF * D.fC); // z = scale of the far city photo
     this.zE = mob ? (DAYV ? 1 : .76) : 1; // phones pull back past 'cover' so more of the city shows; the top edge fades into the navy
     var place = function (el, S, c) { el.style.width = IW * c + 'px'; el.style.height = IH * c + 'px'; el.style.left = (T[0] * W - S[0] * IW * c) + 'px'; el.style.top = (T[1] * H - S[1] * IH * c) + 'px'; el.style.transformOrigin = (S[0] * 100) + '% ' + (S[1] * 100) + '%'; };
@@ -2458,8 +2463,8 @@ var LCOL = [{op:'lighter', g:'rgba(63,205,252,.5)', ga:.22, c:'rgba(170,228,255,
     var n = lit[(R() * lit.length) | 0]; return { A: 0, u: n.u, v: n.v, dy: kind === 3 ? -(18 + R() * 26) : 0 };
   };
   Reach.prototype.spawn = function () {
-    var ch = this.ch, out0 = DRAWV && ch === 0 && this.pi % 2 === 1, list = pills(this.m, out0 ? 1 : ch), w = list[(this.pi++) % list.length], ic = w[2], sc = typeof ic === 'string';
-    var kind = ch === 0 && !out0 ? 1 : sc && /ig|tt|yt|x/.test(ic) && ic !== 'tv' ? 3 : 2; if (ch === 0 && this.z / this.z0 < .7) return;
+    var ch = this.ch, out0 = DRAWV && ch === 0 && this.pi % 2 === 1, early = !DRAWV && ch === 1 && this.R < .12, list = pills(this.m, out0 ? 1 : early ? 0 : ch), w = list[(this.pi++) % list.length], ic = w[2], sc = typeof ic === 'string';
+    var kind = (ch === 0 && !out0) || early ? 1 : sc && /ig|tt|yt|x/.test(ic) && ic !== 'tv' ? 3 : 2; if (ch === 0 && this.z / this.z0 < .7 && !early) return; /* Nov 17 (Lauren): no dead zone at the start of chapter 2 on mid */
     var el = document.createElement('span'); el.className = 'hpt ' + (sc ? 'rx-so' : 'c' + ic);
     el.innerHTML = '<i' + (sc ? ' style="background:' + SOC_BG[ic] + '"' : '') + '>' + (sc ? SOC[ic] : PLUS) + '</i><b>' + w[0] + (w[3] ? '' : ' pts') + '</b><span class="r">' + w[1] + '</span>';
     this.pl.appendChild(el); var p = { el: el, born: this.t, life: 4.4, pts: +w[0].slice(1) };
@@ -2489,12 +2494,13 @@ var LCOL = [{op:'lighter', g:'rgba(63,205,252,.5)', ga:.22, c:'rgba(170,228,255,
     p.el.style.left = cx + 'px'; p.el.style.top = y + 'px'; return true;
   };
   Reach.prototype.icon = function () { /* drawn version: small social reactions popping up around the city on their own (Lauren, Nov 17) */
-    var self = this, R = this.R, lit = this.nodes.filter(function (n) { return n.d < R - .01 && (DRAWV || n.d > .13); }); if (!lit.length) return; /* mid: reactions out in the city, not on the ballpark */
+    var self = this, R = this.R, lit = this.nodes.filter(function (n) { return DRAWV ? n.d < R - .01 : n.d > .13 && n.d < Math.max(R - .01, .3); }); if (!lit.length) return; /* mid: reactions out in the city, not on the ballpark */
     if (this.regionA() > .5) lit = RXCITY.region.filter(function (c) { return !c.home; }).map(function (c) { var j = .012 * c.w; return { u: c.u + (Math.random() - .5) * j, v: c.v + (Math.random() - .5) * j * .7 }; });
     var ks = this.keep();
     for (var k = 0; k < 8; k++) {
       var n = lit[(Math.random() * lit.length) | 0], q = this.ptB(n.u, n.v);
       if (q[0] < 24 || q[0] > this.W - 24 || q[1] < 50 || q[1] > this.H - 16) continue;
+      if (!DRAWV) { var cc0 = this.ptB(this.D.SC[0], this.D.SC[1]), sb0 = IW * this.cF * this.z, ex = (q[0] - cc0[0]) / (sb0 * .15), ey = (q[1] - cc0[1]) / (sb0 * .15 * VS); if (ex * ex + ey * ey < 1) continue; } /* mid: never on the ballpark or its scoreboard (Lauren: icon looked stuck on the board) */
       var bad = ks.some(function (b) { return q[0] > b[0] - 24 && q[0] < b[1] + 24 && q[1] > b[2] - 10 && q[1] < b[3] + 50; }); if (bad) continue;
       if (this.icons.some(function (o) { return Math.abs(o.x - q[0]) < 46 && Math.abs(o.y - q[1]) < 46; })) continue;
       if (this.pills.some(function (o) { var b = o.b; return b && q[0] > b[0] - 22 && q[0] < b[1] + 22 && q[1] > b[2] - 10 && q[1] < b[3] + 52; })) continue;
@@ -2529,7 +2535,7 @@ var LCOL = [{op:'lighter', g:'rgba(63,205,252,.5)', ga:.22, c:'rgba(170,228,255,
   Reach.prototype.regionA = function () { var kk = this.cF * this.z, a = clamp((.42 - kk) / .3, 0, 1); return DRAWV && RXCITY.region ? a * a * (3 - 2 * a) : 0; };
   Reach.prototype.drawRegion = function (x, c, t) {
     var rA = this.regionA(); if (rA < .01) return; var self = this, mob = MOB(), sB = IW * this.cF * this.z;
-    var hr = (mob ? 34 : 54) * rA; x.globalAlpha = .55 * rA; x.drawImage(SPR, c[0] - hr, c[1] - hr * .8, hr * 2, hr * 1.6); x.globalAlpha = .9 * rA; x.drawImage(SPR_R, c[0] - 8, c[1] - 8, 16, 16);
+    var hr = (mob ? 46 : 64) * rA; x.globalAlpha = (mob ? .26 : .34) * rA; x.drawImage(SPR, c[0] - hr, c[1] - hr * .75, hr * 2, hr * 1.5); x.globalAlpha = .75 * rA; x.drawImage(SPR_R, c[0] - 7, c[1] - 7, 14, 14); /* softer home glow (Lauren, Nov 17) */
     RXCITY.region.forEach(function (rc, i) { var q = self.ptB(rc.u, rc.v); rc.q = q; if (rc.home) return;
       self.arcD(x, { u: rc.u, v: rc.v, d: -1, r: i % 4 === 1 }, q, c, sB, rA, t + i * 1.7, 1); });
     x.globalCompositeOperation = 'source-over'; x.font = '600 ' + (mob ? 10 : 12) + 'px Pangram, system-ui, sans-serif'; x.textBaseline = 'middle';
@@ -2551,7 +2557,7 @@ var LCOL = [{op:'lighter', g:'rgba(63,205,252,.5)', ga:.22, c:'rgba(170,228,255,
       x.globalAlpha = a; x.drawImage(g.r ? SPR_R : SPR, q[0] - r, q[1] - r, r * 2, r * 2);
     });
     // 2) reach ring + lit homes, bars and phones across the city (wide photo)
-    var R = this.R, sB = IW * this.cF * this.z, c = this.ptB(this.D.SC[0], this.D.SC[1]); if (DRAWV) this.drawRegion(x, c, t); var fR = DRAWV ? 1 - .85 * this.regionA() : 1;
+    var R = this.R, sB = IW * this.cF * this.z, c = this.ptB(this.D.SC[0], this.D.SC[1]); if (DRAWV) this.drawRegion(x, c, t); var fR = DRAWV ? 1 - this.regionA() : 1; /* Nov 17: city nodes fully hand over to the region view (they piled into a white blob on phones) */
     if (R > 0) {
       var zp = (Math.log(this.z0) - Math.log(this.z)) / (Math.log(this.z0) - Math.log(this.zE || 1)), ra = (DRAWV ? .32 : sst(.3, .55, zp)) * (1 - sst(.78, .9, p)) * .9;
       if (ra > .01) { x.save(); x.translate(c[0], c[1]); x.scale(1, VS * 1.0); /* Nov 17: clearer ring (Lauren): navy underline on day photos, brighter core, and a soft pulse travelling out from the venue to the edge */
@@ -2585,7 +2591,7 @@ var LCOL = [{op:'lighter', g:'rgba(63,205,252,.5)', ga:.22, c:'rgba(170,228,255,
         x.globalAlpha = on * tw * fR; x.drawImage(n.r ? SPR_R : SPR, q[0] - r, q[1] - r, r * 2, r * 2);
       });
       // the venue itself glows as points flow in
-      var vg = sst(.4, .7, p); if (vg > .01) { var rr = Math.max(26, .06 * sB) * (1 + .06 * Math.sin(t * 2)); x.globalAlpha = .15 * vg; x.drawImage(SPR, c[0] - rr, c[1] - rr * .8, rr * 2, rr * 1.6); }
+      var vg = sst(.4, .7, p); if (vg > .01) { var rr = Math.max(26, .06 * sB) * (1 + .06 * Math.sin(t * 2)); x.globalAlpha = .15 * vg * fR; x.drawImage(SPR, c[0] - rr, c[1] - rr * .8, rr * 2, rr * 1.6); }
     }
     x.globalAlpha = 1; x.globalCompositeOperation = 'source-over';
   };
@@ -2616,7 +2622,7 @@ var LCOL = [{op:'lighter', g:'rgba(63,205,252,.5)', ga:.22, c:'rgba(170,228,255,
     // pills
     var alive = this.pills.length; /* Nov 17 (Lauren): at most 2 on screen, including one that is fading out */
     if (!this.reduced && this.t > this.next && alive < 2 && (p > 0 || this.pe > .45)) { this.spawn(); this.next = this.t + (MOB() ? 1.6 : 1.3) + Math.random() * .5; } /* Nov 17: first pill as soon as the band is half in view, then quicker */
-    if ((DRAWV || this.R > .03) && !this.reduced) { var me = this; this.icons = this.icons || []; /* Nov 17: mid gets the social reactions too, once the city lights up (Lauren) */
+    if ((DRAWV || this.ch >= 1) && !this.reduced) { var me = this; this.icons = this.icons || []; /* Nov 17: mid gets the social reactions too, once the city lights up (Lauren) */
       if (this.t > (this.nic || 0) && this.icons.length < (MOB() ? 4 : DRAWV ? 7 : 6) && (p > 0 || this.pe > .45)) { this.icon(); this.nic = this.t + .35 + Math.random() * .45; }
       var PR = (this.fc = (this.fc || 0) + 1) % 4 ? null : this.pills.filter(function (q) { return !q.dead; }).map(function (q) { return q.el.getBoundingClientRect(); }); /* an icon that ends up under a pill bows out (checked every 4th frame) */
       this.icons = this.icons.filter(function (o) { var q = me.ptB(o.n.u, o.n.v); o.x = q[0]; o.y = q[1]; o.el.style.left = q[0] + 'px'; o.el.style.top = q[1] + 'px';
