@@ -1602,7 +1602,7 @@ html.hday .hero.bc .hc h1,html.hday .hero.bc .hc p{text-shadow:0 2px 24px rgba(5
       <div class="rx-chs">
         <div class="rx-ch"><h2 class="rx-h" id="rx-t1"><span class="lt">Loyalty traditionally</span> stops at the gate.</h2><p>Teams only knew the fans in the building, fans were rewarded at the venue if at all, and partners paid for reach they couldn&rsquo;t prove.</p></div>
         <div class="rx-ch"><h2 class="rx-h"><span class="lt">With FanMore,</span> reach goes far beyond the arena.</h2><p>Fans earn and redeem points wherever they follow the game, at home, at the bar, on the commute, even in the offseason.</p></div>
-        <div class="rx-ch"><h2 class="rx-h"><span class="lt">Now every fan is</span> counted, rewarded and valued.</h2><p>Teams finally know who their fans really are, and partners see what every campaign delivers.</p></div>
+        <div class="rx-ch"><h2 class="rx-h"><span class="lt">Now every fan is</span> counted, valued and rewarded.</h2><p>Teams finally know who their fans really are, and partners see what every campaign delivers.</p></div>
       </div>
       <div class="rx-cnt" aria-hidden="true"><i class="dt"></i><span class="rx-n">0</span><span class="rx-lb">points earned today</span></div>
       <div class="rx-rail" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -2402,7 +2402,7 @@ var LCOL = [{op:'lighter', g:'rgba(63,205,252,.5)', ga:.22, c:'rgba(170,228,255,
   function Reach(root) {
     var v = root.getAttribute('data-v'), D = RX[v]; if (!D) return;
     this.root = root; this.D = D; this.m = D.meta;
-    this.st = root.querySelector('.rx-st'); this.A = root.querySelector('.rx-a'); this.B = root.querySelector('.rx-b'); this.F = root.querySelector('.rx-f');
+    this.st = root.querySelector('.rx-st'); this.A = root.querySelector('.rx-a'); this.B = root.querySelector('.rx-b'); this.F = root.querySelector('.rx-f'); this.G = root.querySelector('.rx-g'); /* Nov 18 wide test: region aerial behind the city */
     this.cv = root.querySelector('.rx-cv'); this.cx = this.cv.getContext('2d'); this.pl = root.querySelector('.rx-pl');
     this.chs = [].slice.call(root.querySelectorAll('.rx-ch')); this.rail = [].slice.call(root.querySelectorAll('.rx-rail i'));
     this.num = root.querySelector('.rx-n'); this.cnt = root.querySelector('.rx-cnt');
@@ -2428,6 +2428,8 @@ var LCOL = [{op:'lighter', g:'rgba(63,205,252,.5)', ga:.22, c:'rgba(170,228,255,
     this.zE = mob ? (DAYV ? 1 : .76) : 1; // phones pull back past 'cover' so more of the city shows; the top edge fades into the navy
     var place = function (el, S, c) { el.style.width = IW * c + 'px'; el.style.height = IH * c + 'px'; el.style.left = (T[0] * W - S[0] * IW * c) + 'px'; el.style.top = (T[1] * H - S[1] * IH * c) + 'px'; el.style.transformOrigin = (S[0] * 100) + '% ' + (S[1] * 100) + '%'; };
     place(this.A, D.SA, this.cA); place(this.B, D.SB, this.cB); place(this.F, D.SC, this.cF);
+    if (this.G) { this.cG = cover(D.SG); place(this.G, D.SG, this.cG); this.zW = this.cG * D.fG / (this.cF * D.fC); } /* wide test: the last chapter pulls back until the region photo fills the frame */
+    this.txB = null; /* text box re-measured after a resize */
     var dpr = Math.min(devicePixelRatio || 1, 2); this.dpr = dpr; this.cv.width = Math.round(W * dpr); this.cv.height = Math.round(H * dpr);
     this.lastZ = -1;
   };
@@ -2436,6 +2438,7 @@ var LCOL = [{op:'lighter', g:'rgba(63,205,252,.5)', ga:.22, c:'rgba(170,228,255,
     if (innerWidth > 900) { var g = Math.max(32, (innerWidth - Math.min(innerWidth, 1440)) / 2 + 64); this.root.style.setProperty('--ix', ((1 - e) * g).toFixed(1) + 'px'); this.root.style.setProperty('--ir', ((1 - e) * 20).toFixed(1) + 'px'); } else { this.root.style.removeProperty('--ix'); this.root.style.removeProperty('--ir'); } /* Nov 17: no animation in (Lauren), only the shrink-out at the end; grow-in version = reach.js.v11-growin */ this.root.style.setProperty('--e', e.toFixed(4)); };
   Reach.prototype.zoom = function (p) { // z = scale of the wide photo (1 = settled), the close photo scales with it
     if (DRAWV && this.zR) { var z1 = this.zoom0(Math.min(1, p / .6 * .8)), v2 = Math.pow(sst(.58, 1, p), .85); /* Nov 18: slower, longer pull-back (Lauren: it jumped) */ return v2 > 0 ? Math.exp(Math.log(z1) + (Math.log(this.zR) - Math.log(z1)) * v2) : z1; } /* Nov 18: drawn pulls far back to the region in the last chapter */
+    if (this.zW) { var y1 = this.zoom0(Math.min(1, p / .6 * .8)), w2 = Math.pow(sst(.58, 1, p), .85); return w2 > 0 ? Math.exp(Math.log(y1) + (Math.log(this.zW) - Math.log(y1)) * w2) : y1; }
     return this.zoom0(p);
   };
   Reach.prototype.zoom0 = function (p) {
@@ -2568,9 +2571,14 @@ var LCOL = [{op:'lighter', g:'rgba(63,205,252,.5)', ga:.22, c:'rgba(170,228,255,
         for (var pk = 0; pk < 1; pk++) { var ph = (t / 7) % 1, pr = rr0 * (.25 + .75 * ease(ph)), pa = ra * Math.pow(Math.sin(ph * 3.1416), 2) * .4; /* Nov 17: one slow, soft pulse every 7s (the 1.3s version was distracting) */ if (pa < .02) continue;
           x.beginPath(); x.arc(0, 0, pr, 0, 6.2832); x.globalAlpha = pa; x.lineWidth = 14 + 20 * ph; x.strokeStyle = 'rgba(63,205,252,.22)'; x.stroke(); x.lineWidth = 1.6; x.strokeStyle = 'rgba(190,236,255,.8)'; x.stroke(); }
         x.restore(); }
-      var flow = DRAWV ? 1 : sst(.56, .66, p);
+      if (this.zW && !this.txB) { var tr = this.root.querySelector('.rx-tx').getBoundingClientRect(), sr = this.st.getBoundingClientRect(); this.txB = [tr.left - sr.left - 24, tr.top - sr.top - 24, tr.right - sr.left + 40, tr.bottom - sr.top + 24]; }
+      var flow = DRAWV ? 1 : sst(.56, .66, p), gW = this.zW ? Math.max(1, Math.pow((this.zE || 1) / this.z, 1.25)) : 1;
       this.nodes.forEach(function (n) {
         var on = sst(n.d, n.d + .03, R); if (on < .01) return; var q = self.ptB(n.u, n.v);
+        if (gW > 1.001 && n.arc) { var S0 = self.D.SC; q = self.ptB(S0[0] + (n.u - S0[0]) * gW, S0[1] + (n.v - S0[1]) * gW); var ex = q[0] - c[0], ey = q[1] - c[1], tt = 1, mX = W * .07, mY = H * .1; /* wide test (Lauren): the same lines reach farther out as the camera pulls back, but never touch the frame */
+          if (c[0] + ex < mX) tt = Math.min(tt, (mX - c[0]) / ex); if (c[0] + ex > W - mX) tt = Math.min(tt, (W - mX - c[0]) / ex); if (c[1] + ey < mY) tt = Math.min(tt, (mY - c[1]) / ey); if (c[1] + ey > H - mY) tt = Math.min(tt, (H - mY - c[1]) / ey);
+          tt = Math.max(0, tt); var tb = self.txB; if (tb) { for (var it = 0; it < 30 && tt > 0; it++) { var qx = c[0] + ex * tt, qy = c[1] + ey * tt; if (qx < tb[0] || qx > tb[2] || qy < tb[1] || qy > tb[3]) break; tt -= .035; } tt = Math.max(0, tt); } /* and never end on the copy */
+          q = [c[0] + ex * tt, c[1] + ey * tt]; }
         if (q[0] < -40 || q[0] > W + 40 || q[1] < -40 || q[1] > H + 40) return;
         var tw = .7 + .3 * Math.sin(t * (1.1 + n.s * 1.8) + n.s * 30), r = (n.r ? 15 : 11) * (MOB() ? .85 : 1) * (1 + .5 * (1 - on));
         if (n.arc && DRAWV) self.arcD(x, n, q, c, sB, on * fR, t, R);
@@ -2608,7 +2616,7 @@ var LCOL = [{op:'lighter', g:'rgba(63,205,252,.5)', ga:.22, c:'rgba(170,228,255,
       if (Math.abs(z - this.lastZ) > 1e-4 || Math.abs(rot - (this.lastR || 0)) > 2e-4 || this.T[0] !== this.lastTx) { this.lastZ = z; this.lastR = rot; this.rot = rot; this.lastTx = this.T[0]; RXCITY.render(this.bx, this.W, this.H, this.dpr, this.T, this.cF, z, rot); } }
     else if (Math.abs(z - this.lastZ) > 1e-4) {
       this.lastZ = z; var D = this.D, kA = z / this.z0, kB = z * this.cF * D.fC / (this.cB * D.fB);
-      this.F.style.transform = 'scale(' + z.toFixed(4) + ')'; this.B.style.transform = 'scale(' + kB.toFixed(4) + ')'; this.A.style.transform = 'scale(' + kA.toFixed(4) + ')';
+      this.F.style.transform = 'scale(' + z.toFixed(4) + ')'; this.B.style.transform = 'scale(' + kB.toFixed(4) + ')'; this.A.style.transform = 'scale(' + kA.toFixed(4) + ')'; if (this.G) this.G.style.transform = 'scale(' + (z * this.cF * D.fC / (this.cG * D.fG)).toFixed(4) + ')';
       this.A.style.opacity = sst(.5, .82, kA).toFixed(3); this.A.style.setProperty('--mk', sst(.78, 1.01, kA).toFixed(3));
       this.B.style.opacity = sst(.62, .9, kB).toFixed(3); this.B.style.setProperty('--mk', sst(.86, 1.12, kB).toFixed(3));
     }
