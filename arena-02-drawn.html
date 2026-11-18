@@ -2617,8 +2617,8 @@ var LCOL = [{op:'lighter', g:'rgba(63,205,252,.5)', ga:.22, c:'rgba(170,228,255,
     else if (Math.abs(z - this.lastZ) > 1e-4) {
       this.lastZ = z; var D = this.D, kA = z / this.z0, kB = z * this.cF * D.fC / (this.cB * D.fB);
       this.F.style.transform = 'scale(' + z.toFixed(4) + ')'; this.B.style.transform = 'scale(' + kB.toFixed(4) + ')'; this.A.style.transform = 'scale(' + kA.toFixed(4) + ')'; if (this.G) this.G.style.transform = 'scale(' + (z * this.cF * D.fC / (this.cG * D.fG)).toFixed(4) + ')';
-      this.A.style.opacity = sst(.5, .82, kA).toFixed(3); this.A.style.setProperty('--mk', sst(.78, 1.01, kA).toFixed(3));
-      this.B.style.opacity = sst(.62, .9, kB).toFixed(3); this.B.style.setProperty('--mk', sst(.86, 1.12, kB).toFixed(3));
+      this.A.style.opacity = (this.G ? sst(.24, .4, kA) : sst(.5, .82, kA)).toFixed(3); /* wide: the sharp close photo stays until it is small (Lauren, Nov 18) */ this.A.style.setProperty('--mk', sst(.78, 1.01, kA).toFixed(3));
+      this.B.style.opacity = (this.G ? sst(.16, .3, kB) : sst(.62, .9, kB)).toFixed(3); this.B.style.setProperty('--mk', sst(.86, 1.12, kB).toFixed(3));
     }
     this.R = DRAWV ? .2 + (this.maxd + .06 - .2) * Math.pow(sst(.34, .86, p), 1.1) * Math.min(1, (this.pe || 0) * 1.6) : p < .34 ? 0 : (this.maxd + .06) * Math.pow(sst(.34, .86, p), 1.1); /* drawn: the neighbourhood is already lit when the band arrives (Lauren: action outside the walls from the start, like fourthweb) */
     // counter
@@ -2637,7 +2637,7 @@ var LCOL = [{op:'lighter', g:'rgba(63,205,252,.5)', ga:.22, c:'rgba(170,228,255,
         if (PR && !o.off) { var r = o.el.getBoundingClientRect(); if (PR.some(function (b) { return r.left < b.right + 6 && r.right > b.left - 6 && r.top < b.bottom + 6 && r.bottom > b.top - 6; })) { o.off = 1; o.el.classList.add('off'); setTimeout(function () { o.el.remove(); }, 900); } }
         if (!o.off && me.t - o.born > 2.2) { o.off = 1; o.el.classList.add('off'); setTimeout(function () { o.el.remove(); }, 900); }
         return o.el.isConnected; }); }
-    var self = this; this.pills = this.pills.filter(function (q) { if (!q.dead && self.t - q.born > q.life) self.kill(q); if (!q.el.isConnected) return false; self.place(q, false); return true; });
+    var self = this; this.pills = this.pills.filter(function (q) { if (!q.dead && self.t - q.born > q.life) self.kill(q); if (!q.el.isConnected) return false; self.place(q, false); if (!q.dead && q.b) { var ks = self.keep(), b = q.b; for (var i = 0; i < ks.length; i++) { var k = ks[i]; if (b[0] < k[1] + 16 && b[1] > k[0] - 16 && b[2] < k[3] + 16 && b[3] > k[2] - 16) { self.kill(q); break; } } } return true; }); /* Nov 18: a pill riding the zoom towards the copy fades out before it reaches it (pills never over text) */
   };
   Reach.prototype.loop = function () {
     if (this.running) return; this.running = true; var self = this;
